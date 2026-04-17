@@ -8,11 +8,53 @@ The project focuses on data synchronization between the Android device and cloud
 
 This repository is a portfolio-ready revision of the original coursework.
 
+Original module context:
+- Course: Mobile Programming (ESISA)
+- Supervisor: M. Lahmer
+- Year: 2025
+
 Core goals of the assignment-aligned implementation:
 - Build a real mobile app with platform-specific permissions.
 - Read and process device-native data (contacts and SMS).
 - Implement local persistence and cloud backup/restore workflows.
 - Structure the app with maintainable layers and clear responsibilities.
+
+## Assignment Requirement Coverage (English Mapping)
+
+Below is a direct mapping of the provided assignment statement to this implementation.
+
+1. **Save/restore contacts and SMS from Firebase, identified by Google account email**
+- Implemented through Firebase Authentication + user-scoped data under `users/<uid>` in Realtime Database.
+- Google-based identity is integrated in the service layer and app architecture.
+
+2. **Export/Import SMS, Contacts, and Favorites between phone and cloud database**
+- Contacts: device read + cloud backup/restore flow implemented.
+- SMS: device read + cloud backup/restore flow implemented.
+- Favorites: local SQLite persistence first, then cloud sync/restore logic.
+
+3. **Prefer update-aware backup/restore (date-based updates)**
+- Sync service includes timestamp-based incremental logic patterns (`last_sync_time`, selective backup strategy).
+- Notes: as in most academic prototypes, edge-case conflict resolution can still be hardened.
+
+4. **Contacts view requirements (full name, photo, creation date, phones/emails, favorite icon)**
+- Contact UI includes display name, avatar, phones/emails, metadata, and favorite handling.
+
+5. **SMS view requirements (group by contact, show summary then expand messages)**
+- SMS messages are grouped by contact/address and rendered with expandable conversation UI.
+
+6. **Favorites view requirements (contact + call count + SMS count, tap to call/SMS)**
+- Favorites screen displays interaction counters and quick actions (call/message).
+- Counts are stored in SQLite and updated through service methods.
+
+7. **Open design constraint**
+- UI is custom Material 3-based and not locked to a provided design template.
+
+8. **Firebase setup and test users**
+- README setup includes Firebase project creation/configuration workflow.
+- App behavior assumes authenticated users and user-scoped data for test scenarios.
+
+9. **Realtime DB/Firestore structure guidance**
+- Current implementation uses Firebase Realtime Database with user data domains for contacts, sms, and favorites.
 
 ## Features Implemented
 
